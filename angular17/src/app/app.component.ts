@@ -7,6 +7,8 @@ import interactionPlugin from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
+import resourceTimeGridPlugin from '@fullcalendar/resource-timegrid';
+import scrollGridPlugin from '@fullcalendar/scrollgrid';
 import { INITIAL_EVENTS, createEventId } from './event-utils';
 
 @Component({
@@ -24,22 +26,57 @@ export class AppComponent {
       dayGridPlugin,
       timeGridPlugin,
       listPlugin,
+      // resourceTimelinePlugin,
+      resourceTimeGridPlugin,
+      scrollGridPlugin,
     ],
     headerToolbar: {
       left: 'prev,next today',
       center: 'title',
-      right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+      right: 'resourceTimeGrid,dayGridMonth,timeGridWeek,timeGridDay,listWeek'
     },
-    initialView: 'dayGridMonth',
+    initialView: 'resourceTimeGridDay',
     initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
-    weekends: true,
-    editable: true,
-    selectable: true,
-    selectMirror: true,
-    dayMaxEvents: true,
-    select: this.handleDateSelect.bind(this),
-    eventClick: this.handleEventClick.bind(this),
-    eventsSet: this.handleEvents.bind(this)
+    // weekends: true,
+    // editable: true,
+    // selectable: true,
+    // selectMirror: true,
+    // dayMaxEvents: true,
+    dayMinWidth: 300, // only works if too many resources, otherwise columns get equal split
+    // select: this.handleDateSelect.bind(this),
+    // eventClick: this.handleEventClick.bind(this),
+    // eventsSet: this.handleEvents.bind(this),
+    // resourceAreaWidth: '30%', does not work
+    resources: [ // Define your resources here
+      { id: 'a', title: 'Resource A' },
+      { id: 'b', title: 'Resource B' },
+      { id: 'c', title: 'Resource C' },
+      { id: 'd', title: 'Resource D' },
+      { id: 'e', title: 'Resource E' },
+      { id: 'f', title: 'Resource F' },
+      { id: 'g', title: 'Resource G' },
+      { id: 'h', title: 'Resource H' },
+      { id: 'i', title: 'Resource I' },
+      { id: 'j', title: 'Resource J' },
+      { id: 'k', title: 'Resource K' },
+      { id: 'l', title: 'Resource L' },
+      { id: 'm', title: 'Resource M' },
+      { id: 'n', title: 'Resource N' },
+      { id: 'o', title: 'Resource O' },
+      { id: 'p', title: 'Resource P' },
+      { id: 'q', title: 'Resource Q' },
+      { id: 'r', title: 'Resource R' },
+      { id: 's', title: 'Resource S' },
+      { id: 't', title: 'Resource T' },
+      { id: 'u', title: 'Resource U' },
+      { id: 'v', title: 'Resource V' },
+      { id: 'w', title: 'Resource W' },
+      { id: 'x', title: 'Resource X' },
+      { id: 'y', title: 'Resource Y' },
+      { id: 'z', title: 'Resource Z' }
+
+      // Add more resources as needed
+    ],
     /* you can update a remote database when these fire:
     eventAdd:
     eventChange:

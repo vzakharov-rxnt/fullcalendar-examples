@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "./monorepo-hack.cjs && ng serve",
-    "build": "./monorepo-hack.cjs && ng build",
+    "start": "ng serve",
+    "build": "ng build",
     "watch": "./monorepo-hack.cjs && ng build --watch --configuration development",
     "xxxtest": "./monorepo-hack.cjs && ng test --watch=false --browsers ChromeHeadless",
     "xxxtest:dev": "./monorepo-hack.cjs && ng test",
@@ -25,7 +25,10 @@
     "@fullcalendar/daygrid": "^6.1.10",
     "@fullcalendar/interaction": "^6.1.10",
     "@fullcalendar/list": "^6.1.10",
+    "@fullcalendar/resource-timegrid": "^6.1.11",
+    "@fullcalendar/resource-timeline": "^6.1.11",
     "@fullcalendar/timegrid": "^6.1.10",
+    "@fullcalendar/scrollgrid": "6.1.11",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.2"
