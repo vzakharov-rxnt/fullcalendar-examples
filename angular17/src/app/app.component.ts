@@ -37,16 +37,16 @@ export class AppComponent {
     },
     initialView: 'resourceTimeGridDay',
     initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
+    height: '100%', // TODO: works until an event is added, then it's ignored
     // weekends: true,
-    // editable: true,
-    // selectable: true,
-    // selectMirror: true,
+    editable: true,
+    selectable: true,
+    selectMirror: true,
     // dayMaxEvents: true,
     dayMinWidth: 300, // only works if too many resources, otherwise columns get equal split
-    // select: this.handleDateSelect.bind(this),
-    // eventClick: this.handleEventClick.bind(this),
-    // eventsSet: this.handleEvents.bind(this),
-    // resourceAreaWidth: '30%', does not work
+    select: this.handleDateSelect.bind(this),
+    eventClick: this.handleEventClick.bind(this),
+    eventsSet: this.handleEvents.bind(this),
     resources: [ // Define your resources here
       { id: 'a', title: 'Resource A' },
       { id: 'b', title: 'Resource B' },
@@ -103,7 +103,13 @@ export class AppComponent {
     const title = prompt('Please enter a new title for your event');
     const calendarApi = selectInfo.view.calendar;
 
+    console.log(selectInfo);
     calendarApi.unselect(); // clear date selection
+
+    let resourceId = '';
+    if (selectInfo.resource) { // TODO: type for selectInfo that has resource ?
+      resourceId = selectInfo.resource.id;
+    }
 
     if (title) {
       calendarApi.addEvent({
@@ -111,8 +117,12 @@ export class AppComponent {
         title,
         start: selectInfo.startStr,
         end: selectInfo.endStr,
-        allDay: selectInfo.allDay
+        allDay: selectInfo.allDay,
+        resourceId: resourceId,
       });
+
+      // TODO: below line does not do anything
+      // calendarApi.setOption('height', '100%'); // workaround for height not being set
     }
   }
 
