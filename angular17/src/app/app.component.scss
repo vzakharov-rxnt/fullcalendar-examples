@@ -71,4 +71,12 @@ b { /* used for event dates/times */
   .fc-timegrid-axis {
     color: #6c757d;
   }
+
+  .fc-col-header-cell,
+  .fc-timeline-slot,
+  .fc-datagrid-cell-main {
+    font-weight: normal;
+    font-size: 13px;
+    color: #6c757d;
+  }
 }
