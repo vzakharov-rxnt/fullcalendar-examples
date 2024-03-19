@@ -42,7 +42,7 @@ export class AppComponent {
       resourceTimeGrid: 'Resources View',
       resourceTimeline: 'Timeline',
     },
-    initialView: 'resourceTimeGrid',
+    initialView: 'timeGridDay',
     initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
     height: '100%', // TODO: works until an event is added, then it's ignored
     // weekends: true,
