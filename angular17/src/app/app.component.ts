@@ -29,6 +29,14 @@ export class AppComponent {
       resourceTimeGridPlugin,
       scrollGridPlugin,
     ],
+    slotDuration: '00:05:00',
+    // slotLabelInterval: '00:05:00', // do we need it ? I think it's fine with default
+    slotLabelFormat: {
+      hour: 'numeric',
+      minute: '2-digit',
+      omitZeroMinute: false,
+      meridiem: 'lowercase'
+    },
     headerToolbar: {
       left: 'today prev,next',
       center: 'title',
