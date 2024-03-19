@@ -1,4 +1,3 @@
-
 h2 {
   margin: 0;
   font-size: 16px;
@@ -10,7 +9,7 @@ ul {
 }
 
 li {
-  margin: 1.5em 0;
+  margin: 0.5em 0;
   padding: 0;
 }
 
@@ -20,7 +19,7 @@ b { /* used for event dates/times */
 
 .demo-app {
   display: flex;
-  min-height: 100%;
+  height: 100%;
   font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
   font-size: 14px;
 }
@@ -30,10 +29,12 @@ b { /* used for event dates/times */
   line-height: 1.5;
   background: #eaf9ff;
   border-right: 1px solid #d3e2e8;
+  height: 100%;
+  overflow-y: auto;
 }
 
 .demo-app-sidebar-section {
-  padding: 2em;
+  padding: 1em 1em 0 1em;
 }
 
 .demo-app-main {

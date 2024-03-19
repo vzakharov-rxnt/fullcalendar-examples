@@ -6,7 +6,6 @@ import { CalendarOptions, DateSelectArg, EventClickArg, EventApi } from '@fullca
 import interactionPlugin from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
-import listPlugin from '@fullcalendar/list';
 import resourceTimeGridPlugin from '@fullcalendar/resource-timegrid';
 import scrollGridPlugin from '@fullcalendar/scrollgrid';
 import resourceTimelinePlugin from '@fullcalendar/resource-timeline';
@@ -26,7 +25,6 @@ export class AppComponent {
       interactionPlugin,
       dayGridPlugin,
       timeGridPlugin,
-      listPlugin,
       resourceTimelinePlugin,
       resourceTimeGridPlugin,
       scrollGridPlugin,
@@ -51,8 +49,19 @@ export class AppComponent {
     editable: true,
     selectable: true,
     selectMirror: true,
-    // dayMaxEvents: true,
-    dayMinWidth: 300, // only works if too many resources, otherwise columns get equal split
+    dayMaxEvents: true,
+    // dayMinWidth: 300, // only works if too many resources, otherwise columns get equal split
+    views: {
+      dayGridMonth: {
+        dayMaxEvents: 2, // then will show +1 more
+        // moreLinkText: function(moreEventsCount: number) {
+        //   return moreEventsCount + " Appointments"; // Customize the text as needed
+        // }
+      },
+      resourceTimeGrid: {
+        dayMinWidth: 300, // only works if too many resources, otherwise columns get equal split
+      },
+    },
     select: this.handleDateSelect.bind(this),
     eventClick: this.handleEventClick.bind(this),
     eventsSet: this.handleEvents.bind(this),
