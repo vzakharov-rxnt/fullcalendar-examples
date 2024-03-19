@@ -41,7 +41,3 @@ b { /* used for event dates/times */
   flex-grow: 1;
   padding: 1em;
 }
-
-.fc { /* the calendar root */
-  margin: 0 auto;
-}

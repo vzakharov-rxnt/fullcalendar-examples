@@ -42,7 +42,7 @@ export class AppComponent {
       resourceTimeGrid: 'Resources View',
       resourceTimeline: 'Timeline',
     },
-    initialView: 'resourceTimeGridDay',
+    initialView: 'resourceTimeGrid',
     initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
     height: '100%', // TODO: works until an event is added, then it's ignored
     // weekends: true,
@@ -106,16 +106,16 @@ export class AppComponent {
   constructor(private changeDetector: ChangeDetectorRef) {
   }
 
-  handleCalendarToggle() {
-    this.calendarVisible.update((bool) => !bool);
-  }
-
-  handleWeekendsToggle() {
-    this.calendarOptions.update((options) => ({
-      ...options,
-      weekends: !options.weekends,
-    }));
-  }
+  // handleCalendarToggle() {
+  //   this.calendarVisible.update((bool) => !bool);
+  // }
+  //
+  // handleWeekendsToggle() {
+  //   this.calendarOptions.update((options) => ({
+  //     ...options,
+  //     weekends: !options.weekends,
+  //   }));
+  // }
 
   handleDateSelect(selectInfo: DateSelectArg) {
     const title = prompt('Please enter a new title for your event');

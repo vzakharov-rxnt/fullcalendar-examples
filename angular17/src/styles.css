@@ -1,8 +1,15 @@
-
 html,
-body,
-body > * { /* the app-root */
+body {
   margin: 0;
   padding: 0;
   height: 100%;
+}
+
+:root {
+  --fc-button-bg-color: #e3eaee;
+  --fc-button-text-color: #6c757d;
+  --fc-button-border-color: transparent;
+
+  --fc-button-active-bg-color: #737cf5;
+  --fc-button-active-border-color: transparent;
 }
