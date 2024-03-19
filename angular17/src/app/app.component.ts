@@ -16,7 +16,7 @@ import { INITIAL_EVENTS, createEventId } from './event-utils';
   standalone: true,
   imports: [ CommonModule, RouterOutlet, FullCalendarModule ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
+  styleUrl: './app.component.scss',
 })
 export class AppComponent {
   calendarVisible = signal(true);

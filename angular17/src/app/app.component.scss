@@ -41,3 +41,30 @@ b { /* used for event dates/times */
   flex-grow: 1;
   padding: 1em;
 }
+
+:host ::ng-deep {
+  .fc-button-primary {
+    text-transform: uppercase;
+    font-size: 10px;
+    font-family: Helvetica, serif;
+  }
+
+  .fc .fc-button-primary:not(:disabled).fc-button-active,
+  .fc .fc-button-primary:not(:disabled):active {
+    color: #fff;
+  }
+
+  .fc-button-group {
+    gap: 3px;
+  }
+
+  .fc .fc-button-primary:hover {
+    color: #0472B6;
+  }
+
+  .fc .fc-button-primary:not(:disabled).fc-button-active:focus,
+  .fc .fc-button-primary:not(:disabled):active:focus,
+  .fc .fc-button-primary:focus {
+    box-shadow: none;
+  }
+}
