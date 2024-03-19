@@ -52,7 +52,7 @@ export class AppComponent {
     },
     initialView: 'timeGridDay',
     initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
-    height: '100%', // TODO: works until an event is added, then it's ignored
+    height: '100%',
     // weekends: true,
     editable: true,
     selectable: true,

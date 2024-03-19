@@ -79,4 +79,10 @@ b { /* used for event dates/times */
     font-size: 13px;
     color: #6c757d;
   }
+
+  .fc-resourceTimeline-view {
+    .fc-timeline-slot.fc-timeline-slot-lane {
+      background: var(--fc-today-bg-color);
+    }
+  }
 }
