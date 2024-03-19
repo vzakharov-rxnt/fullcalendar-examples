@@ -81,7 +81,7 @@ b { /* used for event dates/times */
   }
 
   .fc-resourceTimeline-view {
-    .fc-timeline-slot.fc-timeline-slot-lane {
+    .fc-timeline-slot.fc-timeline-slot-lane.fc-slot-today {
       background: var(--fc-today-bg-color);
     }
   }
