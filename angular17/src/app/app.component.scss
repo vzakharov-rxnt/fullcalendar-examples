@@ -66,4 +66,9 @@ b { /* used for event dates/times */
   .fc .fc-button-primary:focus {
     box-shadow: none;
   }
+
+  .fc-timegrid-slot,
+  .fc-timegrid-axis {
+    color: #6c757d;
+  }
 }

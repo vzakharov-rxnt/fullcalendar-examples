@@ -62,6 +62,7 @@ export class AppComponent {
         dayMinWidth: 300, // only works if too many resources, otherwise columns get equal split
       },
     },
+    allDayText: 'All-Day',
     select: this.handleDateSelect.bind(this),
     eventClick: this.handleEventClick.bind(this),
     eventsSet: this.handleEvents.bind(this),
