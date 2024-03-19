@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:netlify": "ng build --base-href=/",
     "watch": "./monorepo-hack.cjs && ng build --watch --configuration development",
     "xxxtest": "./monorepo-hack.cjs && ng test --watch=false --browsers ChromeHeadless",
     "xxxtest:dev": "./monorepo-hack.cjs && ng test",

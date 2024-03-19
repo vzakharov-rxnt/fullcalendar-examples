@@ -1,4 +1,4 @@
-import { Component , signal, ChangeDetectorRef } from '@angular/core';
+import { Component, signal, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { FullCalendarModule } from '@fullcalendar/angular';
@@ -9,14 +9,15 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
 import resourceTimeGridPlugin from '@fullcalendar/resource-timegrid';
 import scrollGridPlugin from '@fullcalendar/scrollgrid';
+import resourceTimelinePlugin from '@fullcalendar/resource-timeline';
 import { INITIAL_EVENTS, createEventId } from './event-utils';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, FullCalendarModule],
+  imports: [ CommonModule, RouterOutlet, FullCalendarModule ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
 })
 export class AppComponent {
   calendarVisible = signal(true);
@@ -26,14 +27,22 @@ export class AppComponent {
       dayGridPlugin,
       timeGridPlugin,
       listPlugin,
-      // resourceTimelinePlugin,
+      resourceTimelinePlugin,
       resourceTimeGridPlugin,
       scrollGridPlugin,
     ],
     headerToolbar: {
-      left: 'prev,next today',
+      left: 'today prev,next',
       center: 'title',
-      right: 'resourceTimeGrid,dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+      right: 'resourceTimeline,resourceTimeGrid,timeGridDay,timeGridWeek,dayGridMonth',
+    },
+    buttonText: {
+      today: 'Today',
+      month: 'Month',
+      week: 'Week',
+      day: 'Day',
+      resourceTimeGrid: 'Resources View',
+      resourceTimeline: 'Timeline',
     },
     initialView: 'resourceTimeGridDay',
     initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
@@ -48,32 +57,32 @@ export class AppComponent {
     eventClick: this.handleEventClick.bind(this),
     eventsSet: this.handleEvents.bind(this),
     resources: [ // Define your resources here
-      { id: 'a', title: 'Resource A' },
-      { id: 'b', title: 'Resource B' },
-      { id: 'c', title: 'Resource C' },
-      { id: 'd', title: 'Resource D' },
-      { id: 'e', title: 'Resource E' },
-      { id: 'f', title: 'Resource F' },
-      { id: 'g', title: 'Resource G' },
-      { id: 'h', title: 'Resource H' },
-      { id: 'i', title: 'Resource I' },
-      { id: 'j', title: 'Resource J' },
-      { id: 'k', title: 'Resource K' },
-      { id: 'l', title: 'Resource L' },
-      { id: 'm', title: 'Resource M' },
-      { id: 'n', title: 'Resource N' },
-      { id: 'o', title: 'Resource O' },
-      { id: 'p', title: 'Resource P' },
-      { id: 'q', title: 'Resource Q' },
-      { id: 'r', title: 'Resource R' },
-      { id: 's', title: 'Resource S' },
-      { id: 't', title: 'Resource T' },
-      { id: 'u', title: 'Resource U' },
-      { id: 'v', title: 'Resource V' },
-      { id: 'w', title: 'Resource W' },
-      { id: 'x', title: 'Resource X' },
-      { id: 'y', title: 'Resource Y' },
-      { id: 'z', title: 'Resource Z' }
+      {id: 'a', title: 'Resource A'},
+      {id: 'b', title: 'Resource B'},
+      {id: 'c', title: 'Resource C'},
+      {id: 'd', title: 'Resource D'},
+      {id: 'e', title: 'Resource E'},
+      {id: 'f', title: 'Resource F'},
+      {id: 'g', title: 'Resource G'},
+      {id: 'h', title: 'Resource H'},
+      {id: 'i', title: 'Resource I'},
+      {id: 'j', title: 'Resource J'},
+      {id: 'k', title: 'Resource K'},
+      {id: 'l', title: 'Resource L'},
+      {id: 'm', title: 'Resource M'},
+      {id: 'n', title: 'Resource N'},
+      {id: 'o', title: 'Resource O'},
+      {id: 'p', title: 'Resource P'},
+      {id: 'q', title: 'Resource Q'},
+      {id: 'r', title: 'Resource R'},
+      {id: 's', title: 'Resource S'},
+      {id: 't', title: 'Resource T'},
+      {id: 'u', title: 'Resource U'},
+      {id: 'v', title: 'Resource V'},
+      {id: 'w', title: 'Resource W'},
+      {id: 'x', title: 'Resource X'},
+      {id: 'y', title: 'Resource Y'},
+      {id: 'z', title: 'Resource Z'},
 
       // Add more resources as needed
     ],
