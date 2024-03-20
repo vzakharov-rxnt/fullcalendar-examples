@@ -2,7 +2,7 @@ import { Component, signal, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { FullCalendarModule } from '@fullcalendar/angular';
-import { CalendarOptions, DateSelectArg, EventClickArg, EventApi } from '@fullcalendar/core';
+import { CalendarOptions, DateSelectArg, EventClickArg, EventApi, EventContentArg } from '@fullcalendar/core';
 import interactionPlugin from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
@@ -10,15 +10,20 @@ import resourceTimeGridPlugin from '@fullcalendar/resource-timegrid';
 import scrollGridPlugin from '@fullcalendar/scrollgrid';
 import resourceTimelinePlugin from '@fullcalendar/resource-timeline';
 import { INITIAL_EVENTS, createEventId } from './event-utils';
+import { TooltipModule } from 'primeng/tooltip';
+import { OverlayPanel, OverlayPanelModule } from 'primeng/overlaypanel';
+import { TooltipContainerModule } from './tooltip-container/tooltip-container.module';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [ CommonModule, RouterOutlet, FullCalendarModule ],
+  imports: [ CommonModule, RouterOutlet, FullCalendarModule, TooltipModule, OverlayPanelModule, TooltipContainerModule ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
+  selectedEvent: EventContentArg | null = null;
+
   calendarVisible = signal(true);
   calendarOptions = signal<CalendarOptions>({
     plugins: [
@@ -35,7 +40,7 @@ export class AppComponent {
       hour: 'numeric',
       minute: '2-digit',
       omitZeroMinute: false,
-      meridiem: 'lowercase'
+      meridiem: 'lowercase',
     },
     headerToolbar: {
       left: 'today prev,next',
@@ -112,19 +117,19 @@ export class AppComponent {
   });
   currentEvents = signal<EventApi[]>([]);
 
-  constructor(private changeDetector: ChangeDetectorRef) {
+  constructor(
+    private changeDetector: ChangeDetectorRef,
+  ) {
   }
 
-  // handleCalendarToggle() {
-  //   this.calendarVisible.update((bool) => !bool);
-  // }
-  //
-  // handleWeekendsToggle() {
-  //   this.calendarOptions.update((options) => ({
-  //     ...options,
-  //     weekends: !options.weekends,
-  //   }));
-  // }
+  showOverlay(event: MouseEvent, eventData: EventContentArg, overlayPanel: OverlayPanel) {
+    this.selectedEvent = eventData;
+    overlayPanel.show(event);
+  }
+
+  hideOverlay(overlayPanel: OverlayPanel) {
+    overlayPanel.hide();
+  }
 
   handleDateSelect(selectInfo: DateSelectArg) {
     const title = prompt('Please enter a new title for your event');

@@ -29,8 +29,10 @@
     "@fullcalendar/list": "^6.1.10",
     "@fullcalendar/resource-timegrid": "^6.1.11",
     "@fullcalendar/resource-timeline": "^6.1.11",
-    "@fullcalendar/timegrid": "^6.1.10",
     "@fullcalendar/scrollgrid": "6.1.11",
+    "@fullcalendar/timegrid": "^6.1.10",
+    "@ngneat/helipopper": "^9.2.1",
+    "primeng": "^17.11.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.2"
