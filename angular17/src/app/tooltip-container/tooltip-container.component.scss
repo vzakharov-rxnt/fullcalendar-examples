@@ -1,6 +1,8 @@
 .flex-column {
   display: flex;
   flex-direction: column;
+  max-width: 400px;
+  gap: 10px;
 }
 
 .event-time {
@@ -9,4 +11,9 @@
 
 .event-title {
   text-transform: uppercase;
+}
+
+.event-description {
+  font-size: 0.8em;
+  color: #666;
 }

@@ -1,4 +1,4 @@
-import { Component, signal, ChangeDetectorRef } from '@angular/core';
+import { Component, signal, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { FullCalendarModule } from '@fullcalendar/angular';
@@ -19,13 +19,16 @@ import { INITIAL_EVENTS, createEventId } from './event-utils';
 import { TooltipModule } from 'primeng/tooltip';
 import { OverlayPanel, OverlayPanelModule } from 'primeng/overlaypanel';
 import { TooltipContainerModule } from './tooltip-container/tooltip-container.module';
+import { AddEventPopupModule } from './add-event-popup/add-event-popup.module';
+import { IAddEventPopupForm } from './add-event-popup/add-event-popup.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [ CommonModule, RouterOutlet, FullCalendarModule, TooltipModule, OverlayPanelModule, TooltipContainerModule ],
+  imports: [ CommonModule, RouterOutlet, FullCalendarModule, TooltipModule, OverlayPanelModule, TooltipContainerModule, AddEventPopupModule ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
   calendarVisible = signal(true);
@@ -120,8 +123,10 @@ export class AppComponent {
   });
 
   selectedEvent: EventContentArg | null = null;
+  selectInfo: DateSelectArg | null = null;
   initialEvents: EventInput[] = INITIAL_EVENTS;
   currentEvents: EventInput[] = [];
+  showAddEventPopup: boolean = false;
 
   constructor(
     private changeDetector: ChangeDetectorRef,
@@ -139,26 +144,8 @@ export class AppComponent {
   }
 
   handleDateSelect(selectInfo: DateSelectArg) {
-    const title = prompt('Please enter a new title for your event');
-    const calendarApi = selectInfo.view.calendar;
-
-    calendarApi.unselect(); // clear date selection
-
-    let resourceId = '';
-    if (selectInfo.resource) {
-      resourceId = selectInfo.resource.id;
-    }
-
-    if (title) {
-      calendarApi.addEvent({
-        id: createEventId(),
-        title,
-        start: selectInfo.startStr,
-        end: selectInfo.endStr,
-        allDay: selectInfo.allDay,
-        resourceId: resourceId,
-      });
-    }
+    this.showAddEventPopup = true;
+    this.selectInfo = selectInfo;
   }
 
   handleEventClick(clickInfo: EventClickArg) {
@@ -173,11 +160,34 @@ export class AppComponent {
       title: event.title,
       start: event.startStr,
       end: event.endStr,
+      // resourceId: event['resourceId'], // TODO: where is resourceId?
       ...event.extendedProps,
     }));
+  }
 
-    console.log('this.currentEvents', this.currentEvents); // TODO: remove when done
+  submitHandler($event: IAddEventPopupForm) {
+    if (!this.selectInfo) {
+      // should never happen
+      return;
+    }
 
-    this.changeDetector.detectChanges(); // workaround for expressionChangedAfterItHasBeenCheckedError
+    const calendarApi = this.selectInfo.view.calendar;
+
+    calendarApi.unselect(); // clear date selection
+
+    let resourceId = '';
+    if (this.selectInfo.resource) {
+      resourceId = this.selectInfo.resource.id;
+    }
+
+    calendarApi.addEvent({
+      id: createEventId(),
+      title: $event.title,
+      description: $event.description,
+      start: this.selectInfo.startStr,
+      end: this.selectInfo.endStr,
+      allDay: this.selectInfo.allDay,
+      resourceId: resourceId,
+    });
   }
 }

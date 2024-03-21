@@ -3,12 +3,13 @@ import { EventInput } from '@fullcalendar/core';
 let eventGuid = 0;
 const TODAY_STR = new Date().toISOString().replace(/T.*$/, ''); // YYYY-MM-DD of today
 
-export const INITIAL_EVENTS: EventInput[] = [
+export const INITIAL_EVENTS: EventInput[] = [ // TODO: figure out a data type for this
   {
     id: createEventId(),
     title: 'All-day event',
     start: TODAY_STR,
-    description: 'This is a cool event',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    resourceId: 'a',
   },
   {
     id: createEventId(),

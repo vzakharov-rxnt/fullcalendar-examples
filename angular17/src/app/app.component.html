@@ -23,8 +23,8 @@
   <div class='demo-app-main'>
     <full-calendar *ngIf='calendarVisible()' [options]='calendarOptions()' [events]="initialEvents">
       <ng-template #eventContent let-arg>
-        <div (mouseenter)="showOverlay($event, arg, op)"
-             (mouseleave)="hideOverlay(op)"
+        <div (mouseenter)="showOverlay($event, arg, tooltipPanel)"
+             (mouseleave)="hideOverlay(tooltipPanel)"
              style="height: 100%">
           <b>{{ arg.timeText }}</b>
           <i>{{ arg.event.title }}</i>
@@ -35,8 +35,11 @@
 
 </div>
 
-<p-overlayPanel #op>
+<p-overlayPanel #tooltipPanel>
   <ng-container *ngIf="selectedEvent">
     <app-tooltip-container [selectedEvent]="selectedEvent"></app-tooltip-container>
   </ng-container>
 </p-overlayPanel>
+
+<app-add-event-popup [(show)]="showAddEventPopup"
+                     (onSubmit)="submitHandler($event)"></app-add-event-popup>
