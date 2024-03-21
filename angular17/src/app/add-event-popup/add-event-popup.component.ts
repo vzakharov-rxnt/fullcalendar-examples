@@ -33,6 +33,11 @@ export class AddEventPopupComponent implements OnChanges, OnInit {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['show']) {
       this.showInternal = this.show;
+
+      if (this.show && this.eventForm) {
+        this.eventForm.reset();
+        this.setDefaultValue();
+      }
     }
   }
 
@@ -51,8 +56,6 @@ export class AddEventPopupComponent implements OnChanges, OnInit {
 
   submit() {
     this.onSubmit.emit(this.eventForm.value);
-    this.eventForm.reset();
-    this.setDefaultValue();
     this.visibleChange(false);
   }
 
