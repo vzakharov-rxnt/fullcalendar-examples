@@ -3,8 +3,9 @@ import {
   Component,
   EventEmitter,
   Input,
-  OnChanges, OnInit,
   Output,
+  OnChanges,
+  OnInit,
   SimpleChanges,
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -50,7 +51,16 @@ export class AddEventPopupComponent implements OnChanges, OnInit {
 
   submit() {
     this.onSubmit.emit(this.eventForm.value);
+    this.eventForm.reset();
+    this.setDefaultValue();
     this.visibleChange(false);
+  }
+
+  private setDefaultValue() {
+    this.eventForm.setValue({
+      title: '',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    });
   }
 
   private createForm() {
@@ -58,6 +68,8 @@ export class AddEventPopupComponent implements OnChanges, OnInit {
       title: [ '', Validators.required ],
       description: [ '' ],
     });
+
+    this.setDefaultValue();
   }
 }
 
