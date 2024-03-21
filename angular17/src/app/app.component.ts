@@ -2,7 +2,13 @@ import { Component, signal, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { FullCalendarModule } from '@fullcalendar/angular';
-import { CalendarOptions, DateSelectArg, EventClickArg, EventApi, EventContentArg } from '@fullcalendar/core';
+import {
+  CalendarOptions,
+  DateSelectArg,
+  EventClickArg,
+  EventApi,
+  EventContentArg, EventInput,
+} from '@fullcalendar/core';
 import interactionPlugin from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
@@ -22,8 +28,6 @@ import { TooltipContainerModule } from './tooltip-container/tooltip-container.mo
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  selectedEvent: EventContentArg | null = null;
-
   calendarVisible = signal(true);
   calendarOptions = signal<CalendarOptions>({
     plugins: [
@@ -56,7 +60,6 @@ export class AppComponent {
       resourceTimeline: 'Timeline',
     },
     initialView: 'timeGridDay',
-    initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
     height: '100%',
     // weekends: true,
     editable: true,
@@ -115,11 +118,15 @@ export class AppComponent {
     eventRemove:
     */
   });
-  currentEvents = signal<EventApi[]>([]);
+
+  selectedEvent: EventContentArg | null = null;
+  initialEvents: EventInput[] = INITIAL_EVENTS;
+  currentEvents: EventInput[] = [];
 
   constructor(
     private changeDetector: ChangeDetectorRef,
   ) {
+    this.currentEvents = this.initialEvents;
   }
 
   showOverlay(event: MouseEvent, eventData: EventContentArg, overlayPanel: OverlayPanel) {
@@ -135,11 +142,10 @@ export class AppComponent {
     const title = prompt('Please enter a new title for your event');
     const calendarApi = selectInfo.view.calendar;
 
-    console.log(selectInfo);
     calendarApi.unselect(); // clear date selection
 
     let resourceId = '';
-    if (selectInfo.resource) { // TODO: type for selectInfo that has resource ?
+    if (selectInfo.resource) {
       resourceId = selectInfo.resource.id;
     }
 
@@ -152,9 +158,6 @@ export class AppComponent {
         allDay: selectInfo.allDay,
         resourceId: resourceId,
       });
-
-      // TODO: below line does not do anything
-      // calendarApi.setOption('height', '100%'); // workaround for height not being set
     }
   }
 
@@ -164,8 +167,17 @@ export class AppComponent {
     }
   }
 
-  handleEvents(events: EventApi[]) {
-    this.currentEvents.set(events);
-    this.changeDetector.detectChanges(); // workaround for pressionChangedAfterItHasBeenCheckedError
+  handleEvents(fullCalendarEvents: EventApi[]) {
+    this.currentEvents = fullCalendarEvents.map(event => ({
+      id: event.id,
+      title: event.title,
+      start: event.startStr,
+      end: event.endStr,
+      ...event.extendedProps,
+    }));
+
+    console.log('this.currentEvents', this.currentEvents); // TODO: remove when done
+
+    this.changeDetector.detectChanges(); // workaround for expressionChangedAfterItHasBeenCheckedError
   }
 }
