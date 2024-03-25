@@ -85,6 +85,9 @@ export class AppComponent {
     select: this.handleDateSelect.bind(this),
     eventClick: this.handleEventClick.bind(this),
     eventsSet: this.handleEvents.bind(this),
+    viewDidMount: viewArg => {
+      this.tooltipEnabled = viewArg.view.type !== 'resourceTimeline';
+    },
     resources: [ // Define your resources here
       {id: 'a', title: 'Resource A'},
       {id: 'b', title: 'Resource B'},
@@ -122,19 +125,22 @@ export class AppComponent {
     */
   });
 
+  tooltipEnabled: boolean = true;
   selectedEvent: EventContentArg | null = null;
   selectInfo: DateSelectArg | null = null;
   initialEvents: EventInput[] = INITIAL_EVENTS;
   currentEvents: EventInput[] = [];
   showAddEventPopup: boolean = false;
 
-  constructor(
-    private changeDetector: ChangeDetectorRef,
-  ) {
+  constructor() {
     this.currentEvents = this.initialEvents;
   }
 
   showOverlay(event: MouseEvent, eventData: EventContentArg, overlayPanel: OverlayPanel) {
+    if (!this.tooltipEnabled) {
+      return;
+    }
+
     this.selectedEvent = eventData;
     overlayPanel.show(event);
   }
