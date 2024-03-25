@@ -85,4 +85,8 @@ b { /* used for event dates/times */
       background: var(--fc-today-bg-color);
     }
   }
+
+  .fc .fc-popover {
+    z-index: 999; // when showing +1 event popover, make sure even tooltip is above it
+  }
 }
