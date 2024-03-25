@@ -1,0 +1,27 @@
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
+@import 'tippy.js/dist/tippy.css';
+@import 'tippy.js/themes/light.css';
+@import 'tippy.js/animations/scale.css';
+@import '@fontsource/mulish';
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+
+  font-family: Mulish, sans-serif;
+}
+
+:root {
+  --fc-button-bg-color: #e3eaee;
+  --fc-button-text-color: #6c757d;
+  --fc-button-border-color: transparent;
+
+  --fc-button-active-bg-color: #737cf5;
+  --fc-button-active-border-color: transparent;
+
+  --fc-button-hover-bg-color: #e3eaee;
+  --fc-button-hover-border-color: transparent;
+}

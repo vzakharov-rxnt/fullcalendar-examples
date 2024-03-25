@@ -1,4 +1,3 @@
-
 <div class='demo-app'>
 
   <div class='demo-app-sidebar'>
@@ -11,43 +10,37 @@
       </ul>
     </div>
     <div class='demo-app-sidebar-section'>
-      <label>
-        <input
-          type='checkbox'
-          [checked]='calendarVisible'
-          (change)='handleCalendarToggle()'
-        />
-        toggle whole calendar
-      </label>
-    </div>
-    <div class='demo-app-sidebar-section'>
-      <label>
-        <input
-          type='checkbox'
-          [checked]='calendarOptions().weekends'
-          (change)='handleWeekendsToggle()'
-        />
-        toggle weekends
-      </label>
-    </div>
-    <div class='demo-app-sidebar-section'>
-      <h2>All Events ({{currentEvents.length}})</h2>
+      <h2>All Events ({{ currentEvents.length }})</h2>
       <ul>
-        <li *ngFor='let event of currentEvents()'>
-          <b>{{event.startStr}}</b>
-          <i>{{event.title}}</i>
+        <li *ngFor='let event of currentEvents'>
+          <b>{{ event.start }}</b>
+          <i>{{ event.title }}</i>
         </li>
       </ul>
     </div>
   </div>
 
   <div class='demo-app-main'>
-    <full-calendar *ngIf='calendarVisible()' [options]='calendarOptions()'>
+    <full-calendar *ngIf='calendarVisible()' [options]='calendarOptions()' [events]="initialEvents">
       <ng-template #eventContent let-arg>
-        <b>{{ arg.timeText }}</b>
-        <i>{{ arg.event.title }}</i>
+        <div (mousemove)="showOverlay($event, arg, tooltipPanel)"
+             (mouseleave)="hideOverlay(tooltipPanel)"
+             style="height: 100%">
+          <b>{{ arg.timeText }}</b>
+          <i>{{ arg.event.title }}</i>
+        </div>
       </ng-template>
     </full-calendar>
   </div>
 
 </div>
+
+<p-overlayPanel #tooltipPanel
+                [hideTransitionOptions]="'0s linear'">
+  <ng-container *ngIf="selectedEvent">
+    <app-tooltip-container [selectedEvent]="selectedEvent"></app-tooltip-container>
+  </ng-container>
+</p-overlayPanel>
+
+<app-add-event-popup [(show)]="showAddEventPopup"
+                     (onSubmit)="submitHandler($event)"></app-add-event-popup>

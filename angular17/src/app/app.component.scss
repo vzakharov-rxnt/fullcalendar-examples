@@ -1,0 +1,92 @@
+h2 {
+  margin: 0;
+  font-size: 16px;
+}
+
+ul {
+  margin: 0;
+  padding: 0 0 0 1.5em;
+}
+
+li {
+  margin: 0.5em 0;
+  padding: 0;
+}
+
+b { /* used for event dates/times */
+  margin-right: 3px;
+}
+
+.demo-app {
+  display: flex;
+  height: 100%;
+  font-size: 14px;
+}
+
+.demo-app-sidebar {
+  width: 300px;
+  line-height: 1.5;
+  background: #eaf9ff;
+  border-right: 1px solid #d3e2e8;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.demo-app-sidebar-section {
+  padding: 1em 1em 0 1em;
+}
+
+.demo-app-main {
+  flex-grow: 1;
+  padding: 1em;
+}
+
+:host ::ng-deep {
+  .fc-button-primary {
+    text-transform: uppercase;
+    font-size: 10px;
+    letter-spacing: 1px;
+  }
+
+  .fc .fc-button-primary:not(:disabled).fc-button-active,
+  .fc .fc-button-primary:not(:disabled):active {
+    color: #fff;
+  }
+
+  .fc-button-group {
+    gap: 3px;
+  }
+
+  .fc .fc-button-primary:hover {
+    color: #0472B6;
+  }
+
+  .fc .fc-button-primary:not(:disabled).fc-button-active:focus,
+  .fc .fc-button-primary:not(:disabled):active:focus,
+  .fc .fc-button-primary:focus {
+    box-shadow: none;
+  }
+
+  .fc-timegrid-slot,
+  .fc-timegrid-axis {
+    color: #6c757d;
+  }
+
+  .fc-col-header-cell,
+  .fc-timeline-slot,
+  .fc-datagrid-cell-main {
+    font-weight: normal;
+    font-size: 13px;
+    color: #6c757d;
+  }
+
+  .fc-resourceTimeline-view {
+    .fc-timeline-slot.fc-timeline-slot-lane.fc-slot-today {
+      background: var(--fc-today-bg-color);
+    }
+  }
+
+  .fc .fc-popover {
+    z-index: 999; // when showing +1 event popover, make sure even tooltip is above it
+  }
+}
